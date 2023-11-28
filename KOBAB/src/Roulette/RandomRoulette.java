@@ -38,7 +38,7 @@ public class RandomRoulette extends JFrame {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
-    private void showRouletteDialog() {
+    public void showRouletteDialog() {
         JFrame dialogFrame = new JFrame("룰렛");
         dialogFrame.setSize(400, 400);
         dialogFrame.setLocationRelativeTo(null);
@@ -136,7 +136,7 @@ public class RandomRoulette extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
+    	SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 new RandomRoulette().setVisible(true);

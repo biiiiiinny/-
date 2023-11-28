@@ -21,7 +21,19 @@ public class LoginForm extends JFrame {
     private JButton btnLogin;
     private JButton btnJoin;
     
+    private LoginSuccessListener listener;
 
+    public void setLoginSuccessListener(LoginSuccessListener listener) {
+        this.listener = listener;
+    }
+
+    // 로그인 성공 처리
+    private void onLoginSuccess() {
+        if (listener != null) {
+            listener.onLoginSuccess(tfId.getText());
+        }
+    }
+    
     public LoginForm() {
     
     	users = new UserDataSet();
@@ -38,17 +50,17 @@ public class LoginForm extends JFrame {
         int tfSize = 10;
         Dimension btnSize = new Dimension(100, 25);
 
-        lblId = new JLabel("ID");
+        lblId = new JLabel("아이디");
         lblId.setPreferredSize(lblSize);
-        lblPw = new JLabel("Password");
+        lblPw = new JLabel("비밀번호");
         lblPw.setPreferredSize(lblSize);
 
         tfId = new JTextField(tfSize);
         tfPw = new JPasswordField(tfSize);
 
-        btnLogin = new JButton("Login");
+        btnLogin = new JButton("로그인");
         btnLogin.setPreferredSize(btnSize);
-        btnJoin = new JButton("Join");
+        btnJoin = new JButton("회원가입");
         btnJoin.setPreferredSize(btnSize);
 
     }
@@ -136,15 +148,11 @@ public class LoginForm extends JFrame {
                         infoForm.setVisible(true);
                         tfId.setText("");
                         tfPw.setText("");
+                        onLoginSuccess();
                     }
                     // 존재하지 않는 Id일 경우
                 } else {
-                    JOptionPane.showMessageDialog(
-                            LoginForm.this,
-                            "존재하지 않는 Id입니다."
-                         
-                    );
-                
+                    JOptionPane.showMessageDialog(LoginForm.this,"존재하지 않는 Id입니다.");
                 }
             }
         });
@@ -167,7 +175,7 @@ public class LoginForm extends JFrame {
     }
 
     public void showFrame() {
-        setTitle("Login");
+        setTitle("로그인");
         pack();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

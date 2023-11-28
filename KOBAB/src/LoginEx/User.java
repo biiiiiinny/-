@@ -60,11 +60,11 @@ class User {
 
     @Override
     public String toString() {
-        String info = "Id: " + id + "\n";
-        info += "Pw: " + pw + "\n";
-        info += "Name: " + name + "\n";
-        info += "NickName: " + nickName + "\n";
-        info += "gender: " + gender + "\n";
+        String info = "아이디 : " + id + "\n";
+        info += "비밀번호 : " + pw + "\n";
+        info += "이름 : " + name + "\n";
+        info += "닉네임 : " + nickName + "\n";
+        info += "성별 : " + gender + "\n";
         return info;
     }
 }

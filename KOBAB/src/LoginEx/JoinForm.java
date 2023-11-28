@@ -31,7 +31,7 @@ public class JoinForm extends JDialog {
     private JButton btnCancel;
 
     public JoinForm(LoginForm owner) {
-        super(owner, "Join", true);
+        super(owner, "회원가입", true);
         this.owner = owner;
         users = owner.getUsers();
         
@@ -47,17 +47,17 @@ public class JoinForm extends JDialog {
         Dimension btnSize = new Dimension(100 ,25);
 
 
-        lblTitle = new JLabel("- Input your information");
+        lblTitle = new JLabel("- 정보를 입력하세요");
         lblTitle.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
-        lblId = new JLabel("ID", JLabel.LEFT);
+        lblId = new JLabel("아이디", JLabel.LEFT);
         lblId.setPreferredSize(lblSize);
-        lblPw = new JLabel("Password", JLabel.LEFT);
+        lblPw = new JLabel("비밀번호", JLabel.LEFT);
         lblPw.setPreferredSize(lblSize);
-        lblRe = new JLabel("Retry", JLabel.LEFT);
+        lblRe = new JLabel("비밀번호확인", JLabel.LEFT);
         lblRe.setPreferredSize(lblSize);
-        lblName = new JLabel("Name", JLabel.LEFT);
+        lblName = new JLabel("이름", JLabel.LEFT);
         lblName.setPreferredSize(lblSize);
-        lblNickName = new JLabel("NickName", JLabel.LEFT);
+        lblNickName = new JLabel("닉네임", JLabel.LEFT);
         lblNickName.setPreferredSize(lblSize);
 
         tfId = new JTextField(tfSize);
@@ -66,15 +66,15 @@ public class JoinForm extends JDialog {
         tfName = new JTextField(tfSize);
         tfNickName = new JTextField(tfSize);
 
-        rbtnMale = new JRadioButton("Male", true);
-        rbtnFemale = new JRadioButton("Female");
+        rbtnMale = new JRadioButton("남성", true);
+        rbtnFemale = new JRadioButton("여성");
         ButtonGroup group = new ButtonGroup();
         group.add(rbtnMale);
         group.add(rbtnFemale);
 
-        btnJoin = new JButton("Join");
+        btnJoin = new JButton("회원가입");
         btnJoin.setPreferredSize(btnSize);
-        btnCancel = new JButton("Cancel");
+        btnCancel = new JButton("취소");
         btnCancel.setPreferredSize(btnSize);
 
     }
@@ -121,7 +121,7 @@ public class JoinForm extends JDialog {
         JPanel pnlMSouth = new JPanel(new FlowLayout(FlowLayout.CENTER));
         pnlMSouth.add(rbtnMale);
         pnlMSouth.add(rbtnFemale);
-        pnlMSouth.setBorder(new TitledBorder("Gender"));
+        pnlMSouth.setBorder(new TitledBorder("성별"));
 
         // pnlMain
         pnlMain.add(pnlMNorth, BorderLayout.NORTH);
@@ -178,7 +178,7 @@ public class JoinForm extends JDialog {
                     } else if(!String.valueOf(tfPw.getPassword()).equals(String.valueOf(tfRe.getPassword()))) {
                         JOptionPane.showMessageDialog(
                                 JoinForm.this,
-                                "Password와 Retry가 일치하지 않습니다."
+                                "비밀번호와 비밀번호확인이 일치하지 않습니다."
                         );
                         tfPw.requestFocus();
                     } else {

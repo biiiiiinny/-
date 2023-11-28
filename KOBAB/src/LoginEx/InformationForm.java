@@ -19,7 +19,7 @@ public class InformationForm extends JDialog {
     private JoinForm joinForm;
 
     public InformationForm(LoginForm owner) {
-        super(owner, "Information", true);
+        super(owner, "회원 정보", true);
         this.owner = owner;
         users = owner.getUsers();
 
@@ -35,16 +35,16 @@ public class InformationForm extends JDialog {
         taCheck = new JTextArea(10, 30);
         taCheck.setEditable(false);
 
-        btnLogout = new JButton("Logout");
+        btnLogout = new JButton("로그아웃");
         btnLogout.setPreferredSize(btnsize);
 
-        btnWithdraw = new JButton("withdraw");
+        btnWithdraw = new JButton("회원 탈퇴");
         btnWithdraw.setPreferredSize(btnsize);
     }
     private void setDisplay() {
 
         LineBorder lBorder = new LineBorder(Color.GRAY, 1);
-        TitledBorder border = new TitledBorder(lBorder, "check your Information");
+        TitledBorder border = new TitledBorder(lBorder, "나의 정보");
         taCheck.setBorder(border);
 
         JPanel pnlSouth = new JPanel();
