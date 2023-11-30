@@ -47,6 +47,39 @@ public class Board extends JFrame {
             }
         });
         
+     // 가게 버튼
+        JButton storeButton = new JButton("가게 보기");
+        rouletteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RandomRoulette roulette = new RandomRoulette();
+                roulette.showRouletteDialog();
+            }
+        });
+        rightPanel.add(storeButton);
+        
+     // 카테고리 버튼
+        JButton menuButton = new JButton("카테고리 보기");
+        rouletteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RandomRoulette roulette = new RandomRoulette();
+                roulette.showRouletteDialog();
+            }
+        });
+        rightPanel.add(menuButton);
+        
+     // 학식당 메뉴 버튼
+        JButton sButton = new JButton("오늘 학식 보기");
+        rouletteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RandomRoulette roulette = new RandomRoulette();
+                roulette.showRouletteDialog();
+            }
+        });
+        rightPanel.add(sButton);
+        
         titleField = new JTextField();
         titleField.setMaximumSize(new Dimension(450, 30));
         contentArea = new JTextArea();

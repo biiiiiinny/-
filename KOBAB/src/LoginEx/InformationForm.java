@@ -38,7 +38,7 @@ public class InformationForm extends JDialog {
         btnLogout = new JButton("로그아웃");
         btnLogout.setPreferredSize(btnsize);
 
-        btnWithdraw = new JButton("회원 탈퇴");
+        btnWithdraw = new JButton("게시판 접속");
         btnWithdraw.setPreferredSize(btnsize);
     }
     private void setDisplay() {
@@ -71,7 +71,7 @@ public class InformationForm extends JDialog {
                 users.withdraw(owner.getTfId());
                 JOptionPane.showMessageDialog(
                         InformationForm.this,
-                        "회원 정보가 삭제되었습니다. 안녕히가세요."
+                        "접속 완료!"
                 );
                 dispose();
                 owner.setVisible(true);
