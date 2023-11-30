@@ -69,11 +69,12 @@ public class Board extends JFrame {
         
      // 학식당 메뉴 버튼
         JButton sButton = new JButton("오늘 학식 보기");
-        rouletteButton.addActionListener(new ActionListener() {
+        sButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RandomRoulette roulette = new RandomRoulette();
-                roulette.showRouletteDialog();
+                // 이미지 파일의 경로를 적절히 변경하세요.
+                String imagePath = "/Users/mymac/Downloads/JavaProject-main/KOBAB/P/a.jpeg";
+                showImage(imagePath);
             }
         });
         rightPanel.add(sButton);
@@ -189,5 +190,25 @@ public class Board extends JFrame {
             
         });
         
+    }
+    
+    private void showImage(String imagePath) {
+        ImageIcon icon = new ImageIcon(imagePath);
+        JLabel label = new JLabel(icon);
+
+        // JDialog 생성
+        JDialog dialog = new JDialog();
+        dialog.setTitle("학식 메뉴");
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+        // 이미지 표시를 위한 패널 추가
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add(label, BorderLayout.CENTER);
+        
+        // 이미지 크기에 맞게 다이얼로그 크기 설정
+        dialog.setSize(icon.getIconWidth() + 20, icon.getIconHeight() + 60);
+        
+        dialog.add(panel);
+        dialog.setVisible(true);
     }
 }
