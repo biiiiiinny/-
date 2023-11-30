@@ -138,6 +138,8 @@ public class Board extends JFrame {
         add(panel);
         setVisible(true);
 
+        setLocationRelativeTo(null);
+        
         // 컴포넌트에 적용할 폰트 설정
         titleField.setFont(customFont);
         contentArea.setFont(customFont);
