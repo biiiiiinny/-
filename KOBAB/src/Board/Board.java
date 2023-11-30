@@ -38,7 +38,7 @@ public class Board extends JFrame {
         rightPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
         // 룰렛 기능 추가 버튼
-        JButton rouletteButton = new JButton("룰렛 보기");
+        JButton rouletteButton = new JButton("메뉴 추천 룰렛");
         rouletteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -49,25 +49,23 @@ public class Board extends JFrame {
         
      // 가게 버튼
         JButton storeButton = new JButton("가게 보기");
-        rouletteButton.addActionListener(new ActionListener() {
+        storeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RandomRoulette roulette = new RandomRoulette();
-                roulette.showRouletteDialog();
             }
         });
         rightPanel.add(storeButton);
         
      // 카테고리 버튼
         JButton menuButton = new JButton("카테고리 보기");
-        rouletteButton.addActionListener(new ActionListener() {
+        menuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RandomRoulette roulette = new RandomRoulette();
-                roulette.showRouletteDialog();
+                showCategoryDialog();
             }
         });
         rightPanel.add(menuButton);
+
         
      // 학식당 메뉴 버튼
         JButton sButton = new JButton("오늘 학식 보기");
@@ -154,6 +152,33 @@ public class Board extends JFrame {
             titleField.setText("");
             contentArea.setText("");
         }
+    }
+    
+    private void showCategoryDialog() {
+        // 새 다이얼로그 생성
+        JDialog categoryDialog = new JDialog(this, "카테고리 선택", true);
+        categoryDialog.setSize(300, 200);
+
+        // 각 카테고리를 위한 버튼 생성
+        String[] categories = {"한식", "일식", "중식", "도시락", "기타"};
+        for (String category : categories) {
+            JButton categoryButton = new JButton(category);
+            categoryButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // 카테고리 버튼 클릭 시 수행할 작업
+                    JOptionPane.showMessageDialog(null, "선택한 카테고리: " + category, "카테고리 선택", JOptionPane.INFORMATION_MESSAGE);
+                    categoryDialog.dispose(); // 다이얼로그 닫기
+                }
+            });
+            categoryDialog.add(categoryButton);
+        }
+
+        // 다이얼로그의 레이아웃 설정
+        categoryDialog.setLayout(new GridLayout(categories.length, 1));
+
+        // 다이얼로그 표시
+        categoryDialog.setVisible(true);
     }
 
     public static void main(String[] args) {

@@ -39,11 +39,11 @@ public class RandomRoulette extends JFrame {
     }
 
     public void showRouletteDialog() {
-        JFrame dialogFrame = new JFrame("룰렛");
+        JFrame dialogFrame = new JFrame("점심 메뉴 추천 룰렛");
         dialogFrame.setSize(400, 400);
         dialogFrame.setLocationRelativeTo(null);
 
-        JButton spinButton = new JButton("SPIN");
+        JButton spinButton = new JButton("돌리기!");
         spinButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
