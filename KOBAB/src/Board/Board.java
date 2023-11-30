@@ -73,7 +73,7 @@ public class Board extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 이미지 파일의 경로를 적절히 변경하세요.
-                String imagePath = "/Users/mymac/Downloads/JavaProject-main/KOBAB/P/a.jpeg";
+                String imagePath = "a.jpeg";
                 showImage(imagePath);
             }
         });
@@ -169,8 +169,8 @@ public class Board extends JFrame {
             categoryButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // 카테고리 버튼 클릭 시 수행할 작업
-                    JOptionPane.showMessageDialog(null, "선택한 카테고리: " + category, "카테고리 선택", JOptionPane.INFORMATION_MESSAGE);
+                    // 카테고리 버튼 클릭 시 이미지 창 표시
+                    showImageForCategory(category);
                     categoryDialog.dispose(); // 다이얼로그 닫기
                 }
             });
@@ -182,6 +182,33 @@ public class Board extends JFrame {
 
         // 다이얼로그 표시
         categoryDialog.setVisible(true);
+    }
+
+    private void showImageForCategory(String category) {
+        // 각 카테고리에 해당하는 이미지 경로를 설정
+        String imagePath = getImagePathForCategory(category);
+
+        if (imagePath != null) {
+            showImage(imagePath);
+        } else {
+            JOptionPane.showMessageDialog(null, "해당 카테고리에 대한 이미지가 없습니다.", "이미지 없음", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private String getImagePathForCategory(String category) {
+    	// 예시: 이미지 파일이 "category_이름.jpg" 형식으로 저장되어 있다고 가정
+        String imageName = "category_" + category.toLowerCase() + ".jpeg";
+        
+        // 실제 파일 경로를 가져오는 로직으로 변경해야 함
+        // 여기서는 현재 디렉토리에 이미지 파일이 있다고 가정
+        File imageFile = new File(imageName);
+
+        if (imageFile.exists()) {
+            return imageFile.getAbsolutePath();
+        } else {
+            // 파일이 없을 경우 경고 메시지 출력
+            return null;
+        }
     }
 
     public static void main(String[] args) {
