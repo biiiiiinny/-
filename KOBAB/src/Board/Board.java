@@ -179,7 +179,10 @@ public class Board extends JFrame {
 
         // 다이얼로그의 레이아웃 설정
         categoryDialog.setLayout(new GridLayout(categories.length, 1));
-
+        
+        // 다디얼로그 위치 화면 중앙으로 설정
+        categoryDialog.setLocationRelativeTo(null);
+        
         // 다이얼로그 표시
         categoryDialog.setVisible(true);
     }
@@ -224,9 +227,7 @@ public class Board extends JFrame {
         JLabel label = new JLabel(icon);
 
         // JDialog 생성
-        JDialog dialog = new JDialog();
-        dialog.setTitle("학식 메뉴");
-        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        JDialog dialog = new JDialog(this, "학식 메뉴", true); // 모달로 설정
 
         // 이미지 표시를 위한 패널 추가
         JPanel panel = new JPanel(new BorderLayout());
@@ -236,6 +237,7 @@ public class Board extends JFrame {
         dialog.setSize(icon.getIconWidth() + 20, icon.getIconHeight() + 60);
         
         dialog.add(panel);
+        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }
 }
