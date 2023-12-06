@@ -158,7 +158,7 @@ public class Board extends JFrame {
         userInfoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String memberName = "마";
+                String memberName = "권진영";
                 // 회원 정보를 나타내는 창을 생성하여 이름 표
                 JOptionPane.showMessageDialog(null, "회원 이름: " + memberName, "회원 정보", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -451,28 +451,53 @@ public class Board extends JFrame {
     }
     
     private void openChatDialog() {
-        // 간단한 채팅 다이얼로그를 만들어 보여줍니다.
-        JTextArea chatArea = new JTextArea();
-        chatArea.setEditable(false);
+        // 유저 선택 창
+        String[] users = {"서정빈", "정예원", "윤성빈", "안예준"};  // 예시 유저 목록
+        JComboBox<String> userComboBox = new JComboBox<>(users);
+        
+        JPanel userSelectionPanel = new JPanel();
+        userSelectionPanel.add(new JLabel("대화 상대 선택:"));
+        userSelectionPanel.add(userComboBox);
 
-        JTextField messageField = new JTextField();
-        messageField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String message = messageField.getText();
-                chatArea.append("나: " + message + "\n");
-                messageField.setText("");
-            }
-        });
+        int userSelectionResult = JOptionPane.showConfirmDialog(
+                this,
+                userSelectionPanel,
+                "채팅 상대 선택",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE
+        );
 
-        JPanel chatPanel = new JPanel(new BorderLayout());
-        chatPanel.add(new JScrollPane(chatArea), BorderLayout.CENTER);
-        chatPanel.add(messageField, BorderLayout.SOUTH);
+        if (userSelectionResult == JOptionPane.OK_OPTION) {
+            // OK 버튼이 클릭되었을 때 선택된 유저를 가져옴
+            String selectedUser = (String) userComboBox.getSelectedItem();
 
-        JDialog chatDialog = new JDialog(this, "채팅", true);
-        chatDialog.setSize(400, 300);
-        chatDialog.setLocationRelativeTo(null);
-        chatDialog.add(chatPanel);
-        chatDialog.setVisible(true);
+            // 채팅 창
+            JTextArea chatArea = new JTextArea();
+            chatArea.setEditable(false);
+
+            JTextField messageField = new JTextField();
+            messageField.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String message = messageField.getText();
+                    chatArea.append("나: " + message + "\n");
+                    messageField.setText("");
+                }
+            });
+
+            JPanel chatPanel = new JPanel(new BorderLayout());
+            chatPanel.add(new JScrollPane(chatArea), BorderLayout.CENTER);
+            chatPanel.add(messageField, BorderLayout.SOUTH);
+
+            JDialog chatDialog = new JDialog(this, "채팅 (" + selectedUser + ")", true);
+            chatDialog.setSize(400, 300);
+            chatDialog.setLocationRelativeTo(null);
+            chatDialog.add(chatPanel);
+            chatDialog.setVisible(true);
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new Board().setVisible(true));
     }
 }
