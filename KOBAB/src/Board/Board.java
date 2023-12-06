@@ -27,8 +27,8 @@ public class Board extends JFrame {
     private JList<String> postList;
     private List<String> contents;
     
-    private static final double BUTTON_WIDTH_RATIO = 4.0;  // 폭 비율
-    private static final double BUTTON_HEIGHT_RATIO = 4.0; // 높이 비율
+    private static final double BUTTON_WIDTH_RATIO = 0.5;  // 폭 비율
+    private static final double BUTTON_HEIGHT_RATIO = 1.5; // 높이 비율
 
 
     public Board() {
@@ -44,16 +44,16 @@ public class Board extends JFrame {
         // 게시글 작성을 위한 왼쪽 패널
         JPanel leftPanel = new JPanel();
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
-        leftPanel.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0)); // 상좌하우 
+        leftPanel.setBorder(BorderFactory.createEmptyBorder(100, 50, 0, 0)); // 상좌하우 
 
         // 게시글 목록을 위한 오른쪽 패널
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
-        rightPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 1150));
+        rightPanel.setBorder(BorderFactory.createEmptyBorder(100, 0, 0, 1150));
         
         JPanel upPanel = new JPanel();
         upPanel.setLayout(new BoxLayout(upPanel, BoxLayout.X_AXIS));
-        upPanel.setBorder(BorderFactory.createEmptyBorder(50, 500, 0, 0));
+        upPanel.setBorder(BorderFactory.createEmptyBorder(80, 500, 0, 0));
         
         // 룰렛 기능 추가 버튼
         JButton rouletteButton = new JButton("메뉴 추천 룰렛");
@@ -73,7 +73,7 @@ public class Board extends JFrame {
             }
         });
         upPanel.add(storeButton);
-        upPanel.add(Box.createHorizontalStrut(15)); 
+        upPanel.add(Box.createHorizontalStrut(30)); 
         
      // 가게 보기 버튼에 액션 리스너 추가
         storeButton.addActionListener(new ActionListener() {
@@ -92,7 +92,7 @@ public class Board extends JFrame {
             }
         });
         upPanel.add(menuButton);
-        upPanel.add(Box.createHorizontalStrut(15)); 
+        upPanel.add(Box.createHorizontalStrut(30)); 
 
         	
      // 학식당 메뉴 버튼
@@ -106,7 +106,7 @@ public class Board extends JFrame {
             }
         });
         upPanel.add(sButton);
-        upPanel.add(Box.createHorizontalStrut(15)); 
+        upPanel.add(Box.createHorizontalStrut(30)); 
         
         JButton chatButton = new JButton("채팅");
         chatButton.addActionListener(new ActionListener() {
@@ -117,7 +117,7 @@ public class Board extends JFrame {
         });
 
         upPanel.add(chatButton);
-        upPanel.add(Box.createHorizontalStrut(15));
+        upPanel.add(Box.createHorizontalStrut(30));
         
         titleField = new JTextField();
         titleField.setMaximumSize(new Dimension(450, 30));
@@ -125,7 +125,7 @@ public class Board extends JFrame {
         contentArea.setLineWrap(true);
         contentArea.setWrapStyleWord(true);
         JScrollPane contentScrollPane = new JScrollPane(contentArea);
-        contentScrollPane.setMaximumSize(new Dimension(450, 800));
+        contentScrollPane.setMaximumSize(new Dimension(450, 600));
         // 오른쪽 패널에 룰렛 버튼 추가
         upPanel.add(rouletteButton);
         
@@ -137,6 +137,37 @@ public class Board extends JFrame {
             }
         });
 
+        upPanel.add(Box.createHorizontalStrut(50));
+     // 종료 버튼
+        JButton exitButton = new JButton("로그아웃");
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int option = JOptionPane.showConfirmDialog(null, "프로그램을 종료하시겠습니까?", "종료 확인", JOptionPane.YES_NO_OPTION);
+                if (option == JOptionPane.YES_OPTION) {
+                    System.exit(0); // 프로그램 종료
+                }
+            }
+        });
+
+        // upPanel에 종료 버튼 추가
+        upPanel.add(exitButton);
+
+     // 회원 정보 확인하기 버튼
+        JButton userInfoButton = new JButton("회원 정보");
+        userInfoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String memberName = "마";
+                // 회원 정보를 나타내는 창을 생성하여 이름 표
+                JOptionPane.showMessageDialog(null, "회원 이름: " + memberName, "회원 정보", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
+        // upPanel에 회원 정보 확인하기 버튼 추가
+        upPanel.add(userInfoButton);
+
+        
         postListModel = new DefaultListModel<>();      
         postList = new JList<>(postListModel);
         postList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -148,7 +179,7 @@ public class Board extends JFrame {
             }
         });
         JScrollPane listScrollPane = new JScrollPane(postList);
-        listScrollPane.setMaximumSize(new Dimension(800, 850));
+        listScrollPane.setMaximumSize(new Dimension(800, 650));
 
         Font customFont = new Font("CookieRun Regular", Font.PLAIN, 14);
 
