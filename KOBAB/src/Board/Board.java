@@ -26,6 +26,10 @@ public class Board extends JFrame {
     private DefaultListModel<String> postListModel;
     private JList<String> postList;
     private List<String> contents;
+    
+    private static final double BUTTON_WIDTH_RATIO = 5.5;  // 폭 비율
+    private static final double BUTTON_HEIGHT_RATIO = 5.0; // 높이 비율
+
 
     public Board() {
         setTitle("KOBAB");
@@ -40,16 +44,16 @@ public class Board extends JFrame {
         // 게시글 작성을 위한 왼쪽 패널
         JPanel leftPanel = new JPanel();
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
-        leftPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 10, 0)); // 상좌하우 
+        leftPanel.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0)); // 상좌하우 
 
         // 게시글 목록을 위한 오른쪽 패널
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
-        rightPanel.setBorder(BorderFactory.createEmptyBorder(50, 0, 0, 1230));
+        rightPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 1150));
         
         JPanel upPanel = new JPanel();
         upPanel.setLayout(new BoxLayout(upPanel, BoxLayout.X_AXIS));
-        upPanel.setBorder(BorderFactory.createEmptyBorder(50, 320, 0, 0));
+        upPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         
         // 룰렛 기능 추가 버튼
         JButton rouletteButton = new JButton("메뉴 추천 룰렛");
@@ -69,7 +73,7 @@ public class Board extends JFrame {
             }
         });
         upPanel.add(storeButton);
-        upPanel.add(Box.createHorizontalStrut(60)); 
+        upPanel.add(Box.createHorizontalStrut(1)); 
         
      // 가게 보기 버튼에 액션 리스너 추가
         storeButton.addActionListener(new ActionListener() {
@@ -88,7 +92,7 @@ public class Board extends JFrame {
             }
         });
         upPanel.add(menuButton);
-        upPanel.add(Box.createHorizontalStrut(60)); 
+        upPanel.add(Box.createHorizontalStrut(1)); 
 
         	
      // 학식당 메뉴 버튼
@@ -102,7 +106,7 @@ public class Board extends JFrame {
             }
         });
         upPanel.add(sButton);
-        upPanel.add(Box.createHorizontalStrut(60)); 
+        upPanel.add(Box.createHorizontalStrut(1)); 
         
         JButton chatButton = new JButton("채팅");
         chatButton.addActionListener(new ActionListener() {
@@ -113,7 +117,7 @@ public class Board extends JFrame {
         });
 
         upPanel.add(chatButton);
-        upPanel.add(Box.createHorizontalStrut(60));
+        upPanel.add(Box.createHorizontalStrut(1));
         
         titleField = new JTextField();
         titleField.setMaximumSize(new Dimension(450, 30));
@@ -132,7 +136,6 @@ public class Board extends JFrame {
                 addPost();
             }
         });
-        
 
         postListModel = new DefaultListModel<>();      
         postList = new JList<>(postListModel);
@@ -182,6 +185,25 @@ public class Board extends JFrame {
         contentArea.setFont(customFont);
         postList.setFont(customFont);
         addButton.setFont(customFont);
+        
+
+        
+        Dimension buttonSize = new Dimension((int)(100 * BUTTON_WIDTH_RATIO), (int)(30 * BUTTON_HEIGHT_RATIO));
+        storeButton.setPreferredSize(buttonSize);
+        storeButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, (int)(30 * BUTTON_HEIGHT_RATIO)));
+
+        menuButton.setPreferredSize(buttonSize);
+        menuButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, (int)(30 * BUTTON_HEIGHT_RATIO)));
+
+        sButton.setPreferredSize(buttonSize);
+        sButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, (int)(30 * BUTTON_HEIGHT_RATIO)));
+
+        chatButton.setPreferredSize(buttonSize);
+        chatButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, (int)(30 * BUTTON_HEIGHT_RATIO)));
+
+        rouletteButton.setPreferredSize(buttonSize);
+        rouletteButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, (int)(30 * BUTTON_HEIGHT_RATIO)));
+
     }
 
     private void addPost() {
