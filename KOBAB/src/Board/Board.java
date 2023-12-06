@@ -265,15 +265,49 @@ public class Board extends JFrame {
     }
     
     private void showImageForCategory(String category) {
-        // 각 카테고리에 해당하는 이미지 경로를 설정
-        String imagePath = getImagePathForCategory(category);
-
-        if (imagePath != null) {
-            showImage(imagePath);
+        if ("한식".equals(category)) {
+            showStoreListDialog();
         } else {
-            JOptionPane.showMessageDialog(null, "해당 카테고리에 대한 이미지가 없습니다.", "이미지 없음", JOptionPane.WARNING_MESSAGE);
+            // 각 카테고리에 해당하는 이미지 경로를 설정
+            String imagePath = getImagePathForCategory(category);
+
+            if (imagePath != null) {
+                showImage(imagePath);
+            } else {
+                JOptionPane.showMessageDialog(null, "해당 카테고리에 대한 이미지가 없습니다.", "이미지 없음", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }
+
+    private void showStoreListDialog() {
+        // 가게 목록을 표시하는 다이얼로그 생성
+        JDialog storeListDialog = new JDialog(this, "한식 가게 목록", true);
+        
+        // 가게 목록 정의
+        String[] stores = {"한솥도시락 병천한기대점", "신전떡복이 한기대점",
+                          "김밥천국 한기대점", "거성한식식당 2호점"};
+        
+        // 각 가게에 대한 버튼 생성 및 리스너 추가
+        JPanel storePanel = new JPanel();
+        storePanel.setLayout(new BoxLayout(storePanel, BoxLayout.Y_AXIS));
+        for (String store : stores) {
+            JButton storeButton = new JButton(store);
+            storeButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    showMapForStore(store);
+                }
+            });
+            storePanel.add(storeButton);
+        }
+
+        // 다이얼로그에 가게 목록을 표시하는 패널 추가
+        storeListDialog.add(new JScrollPane(storePanel));
+        storeListDialog.setSize(300, 400);
+        storeListDialog.setLocationRelativeTo(null);
+        storeListDialog.setVisible(true);
+    }
+
 
     private String getImagePathForCategory(String category) {
     	// 예시: 이미지 파일이 "category_이름.jpg" 형식으로 저장되어 있다고 가정
