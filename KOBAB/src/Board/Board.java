@@ -28,7 +28,7 @@ public class Board extends JFrame {
     private List<String> contents;
     
     private static final double BUTTON_WIDTH_RATIO = 0.5;  // 폭 비율
-    private static final double BUTTON_HEIGHT_RATIO = 1.5; // 높이 비율
+    private static final double BUTTON_HEIGHT_RATIO = 1.8; // 높이 비율
 
 
     public Board() {
@@ -44,16 +44,16 @@ public class Board extends JFrame {
         // 게시글 작성을 위한 왼쪽 패널
         JPanel leftPanel = new JPanel();
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
-        leftPanel.setBorder(BorderFactory.createEmptyBorder(100, 50, 0, 0)); // 상좌하우 
+        leftPanel.setBorder(BorderFactory.createEmptyBorder(180, 50, 0, 0)); // 상좌하우 
 
         // 게시글 목록을 위한 오른쪽 패널
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
-        rightPanel.setBorder(BorderFactory.createEmptyBorder(100, 0, 0, 1150));
+        rightPanel.setBorder(BorderFactory.createEmptyBorder(180, 0, 0, 1150));
         
         JPanel upPanel = new JPanel();
         upPanel.setLayout(new BoxLayout(upPanel, BoxLayout.X_AXIS));
-        upPanel.setBorder(BorderFactory.createEmptyBorder(80, 500, 0, 0));
+        upPanel.setBorder(BorderFactory.createEmptyBorder(40, 500, 0, 30));
         
         // 룰렛 기능 추가 버튼
         JButton rouletteButton = new JButton("메뉴 추천 룰렛");
