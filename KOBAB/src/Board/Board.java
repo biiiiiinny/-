@@ -40,6 +40,9 @@ public class Board extends JFrame {
 
         // 메인 패널을 BorderLayout으로 설정
         JPanel panel = new JPanel(new BorderLayout());
+        
+     // 각 버튼에 사용할 폰트 생성
+        Font buttonFont = new Font("Noto Sans KR", Font.PLAIN, 16);  // 원하는 폰트 설정으로 변경
 
         // 게시글 작성을 위한 왼쪽 패널
         JPanel leftPanel = new JPanel();
@@ -57,7 +60,9 @@ public class Board extends JFrame {
         
         JPanel upPanel = new JPanel();
         upPanel.setLayout(new BoxLayout(upPanel, BoxLayout.X_AXIS));
-        upPanel.setBorder(BorderFactory.createEmptyBorder(40, 500, 0, 30));
+
+        upPanel.setBorder(BorderFactory.createEmptyBorder(40, 500, 0, 0));
+
         
         // 룰렛 기능 추가 버튼
         JButton rouletteButton = new JButton("메뉴 추천 룰렛");
@@ -185,7 +190,7 @@ public class Board extends JFrame {
         JScrollPane listScrollPane = new JScrollPane(postList);
         listScrollPane.setMaximumSize(new Dimension(800, 650));
 
-        Font customFont = new Font("CookieRun Regular", Font.PLAIN, 14);
+        Font customFont = new Font("Noto Sans KR", Font.PLAIN, 16);
 
      // 왼쪽 패널에 컴포넌트 추가
         JLabel titleLabel = new JLabel("제목:");
