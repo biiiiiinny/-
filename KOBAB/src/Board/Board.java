@@ -30,22 +30,26 @@ public class Board extends JFrame {
     public Board() {
         setTitle("KOBAB");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500, 500);
+        setSize(1000, 800);
 
         contents = new ArrayList<>();
 
-     // 메인 패널을 BorderLayout으로 설정
+        // 메인 패널을 BorderLayout으로 설정
         JPanel panel = new JPanel(new BorderLayout());
 
         // 게시글 작성을 위한 왼쪽 패널
         JPanel leftPanel = new JPanel();
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
-        leftPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        leftPanel.setBorder(BorderFactory.createEmptyBorder(100, 10, 10, 0));
 
         // 게시글 목록을 위한 오른쪽 패널
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
-        rightPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        rightPanel.setBorder(BorderFactory.createEmptyBorder(100, 0, 0, 500));
+        
+        JPanel upPanel = new JPanel();
+        upPanel.setLayout(new BoxLayout(upPanel, BoxLayout.X_AXIS));
+        upPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         
         // 룰렛 기능 추가 버튼
         JButton rouletteButton = new JButton("메뉴 추천 룰렛");
@@ -64,7 +68,7 @@ public class Board extends JFrame {
             public void actionPerformed(ActionEvent e) {
             }
         });
-        rightPanel.add(storeButton);
+        upPanel.add(storeButton);
         
      // 가게 보기 버튼에 액션 리스너 추가
         storeButton.addActionListener(new ActionListener() {
@@ -82,9 +86,9 @@ public class Board extends JFrame {
                 showCategoryDialog();
             }
         });
-        rightPanel.add(menuButton);
+        upPanel.add(menuButton);
 
-        
+        	
      // 학식당 메뉴 버튼
         JButton sButton = new JButton("오늘 학식 보기");
         sButton.addActionListener(new ActionListener() {
@@ -95,7 +99,8 @@ public class Board extends JFrame {
                 showImage(imagePath);
             }
         });
-        rightPanel.add(sButton);
+        upPanel.add(sButton);
+        
         
         titleField = new JTextField();
         titleField.setMaximumSize(new Dimension(450, 30));
@@ -103,9 +108,9 @@ public class Board extends JFrame {
         contentArea.setLineWrap(true);
         contentArea.setWrapStyleWord(true);
         JScrollPane contentScrollPane = new JScrollPane(contentArea);
-        contentScrollPane.setMaximumSize(new Dimension(450, 600));
+        contentScrollPane.setMaximumSize(new Dimension(450, 400));
         // 오른쪽 패널에 룰렛 버튼 추가
-        rightPanel.add(rouletteButton);
+        upPanel.add(rouletteButton);
         
         JButton addButton = new JButton("게시글 작성");
         addButton.addActionListener(new ActionListener() {
@@ -126,7 +131,7 @@ public class Board extends JFrame {
             }
         });
         JScrollPane listScrollPane = new JScrollPane(postList);
-        listScrollPane.setMaximumSize(new Dimension(900, 350));
+        listScrollPane.setMaximumSize(new Dimension(600, 350));
 
         Font customFont = new Font("CookieRun Regular", Font.PLAIN, 14);
 
@@ -207,7 +212,10 @@ public class Board extends JFrame {
 
     private void showStoreList() {
         // 가게 목록 정의
-        String[] stores = {"멕시카나치킨 병천점", "수신반점 본점", "한솥도시락 병천한기대점"};
+        String[] stores = {"멕시카나치킨 병천점", "수신반점 본점", "한솥도시락 병천한기대점", "신전떡복이 한기대점"
+                           ,"왕천파닭 병천점", "김밥천국 한기대점", "거성한식식당 2호점", "마슬랜치킨 병천한기대점"
+                           , ""};
+        
 
         // 각 가게에 대한 버튼 생성 및 리스너 추가
         JPanel storePanel = new JPanel();

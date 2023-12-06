@@ -89,7 +89,7 @@ public class RandomRoulette extends JFrame {
                     String selectedFood = foods[selectedFoodIndex];
 
                     // Display the selected food (you can modify this part as needed)
-                    JOptionPane.showMessageDialog(dialogFrame, "Selected Food: " + selectedFood);
+                    JOptionPane.showMessageDialog(dialogFrame, " 오늘의 추천 메뉴는 " + selectedFood + "!!");
                 }
             }
         });
