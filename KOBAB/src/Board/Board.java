@@ -49,7 +49,7 @@ public class Board extends JFrame {
         
         JPanel upPanel = new JPanel();
         upPanel.setLayout(new BoxLayout(upPanel, BoxLayout.X_AXIS));
-        upPanel.setBorder(BorderFactory.createEmptyBorder(50, 320, 0, 0));
+        upPanel.setBorder(BorderFactory.createEmptyBorder(50, 600, 0, 0));
         
         // 룰렛 기능 추가 버튼
         JButton rouletteButton = new JButton("메뉴 추천 룰렛");
@@ -229,7 +229,7 @@ public class Board extends JFrame {
         // 가게 목록 정의
         String[] stores = {"멕시카나치킨 병천점", "수신반점 본점", "한솥도시락 병천한기대점", "신전떡복이 한기대점"
                            ,"왕천파닭 병천점", "김밥천국 한기대점", "거성한식식당 2호점", "마슬랜치킨 병천한기대점"
-                           , ""};
+                           , "카페 요깃", "심야술집"};
         
 
         // 각 가게에 대한 버튼 생성 및 리스너 추가
