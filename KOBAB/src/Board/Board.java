@@ -27,8 +27,8 @@ public class Board extends JFrame {
     private JList<String> postList;
     private List<String> contents;
     
-    private static final double BUTTON_WIDTH_RATIO = 5.5;  // 폭 비율
-    private static final double BUTTON_HEIGHT_RATIO = 5.0; // 높이 비율
+    private static final double BUTTON_WIDTH_RATIO = 4.0;  // 폭 비율
+    private static final double BUTTON_HEIGHT_RATIO = 4.0; // 높이 비율
 
 
     public Board() {
@@ -53,7 +53,7 @@ public class Board extends JFrame {
         
         JPanel upPanel = new JPanel();
         upPanel.setLayout(new BoxLayout(upPanel, BoxLayout.X_AXIS));
-        upPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        upPanel.setBorder(BorderFactory.createEmptyBorder(50, 500, 0, 0));
         
         // 룰렛 기능 추가 버튼
         JButton rouletteButton = new JButton("메뉴 추천 룰렛");
@@ -73,7 +73,7 @@ public class Board extends JFrame {
             }
         });
         upPanel.add(storeButton);
-        upPanel.add(Box.createHorizontalStrut(1)); 
+        upPanel.add(Box.createHorizontalStrut(15)); 
         
      // 가게 보기 버튼에 액션 리스너 추가
         storeButton.addActionListener(new ActionListener() {
@@ -92,7 +92,7 @@ public class Board extends JFrame {
             }
         });
         upPanel.add(menuButton);
-        upPanel.add(Box.createHorizontalStrut(1)); 
+        upPanel.add(Box.createHorizontalStrut(15)); 
 
         	
      // 학식당 메뉴 버튼
@@ -106,7 +106,7 @@ public class Board extends JFrame {
             }
         });
         upPanel.add(sButton);
-        upPanel.add(Box.createHorizontalStrut(1)); 
+        upPanel.add(Box.createHorizontalStrut(15)); 
         
         JButton chatButton = new JButton("채팅");
         chatButton.addActionListener(new ActionListener() {
@@ -117,7 +117,7 @@ public class Board extends JFrame {
         });
 
         upPanel.add(chatButton);
-        upPanel.add(Box.createHorizontalStrut(1));
+        upPanel.add(Box.createHorizontalStrut(15));
         
         titleField = new JTextField();
         titleField.setMaximumSize(new Dimension(450, 30));
