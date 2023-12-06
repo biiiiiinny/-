@@ -21,7 +21,7 @@ import java.net.URL;
 import java.awt.Desktop;
 
 public class Board extends JFrame {
-    private JTextField titleField;
+	private JTextField titleField;
     private JTextArea contentArea;
     private DefaultListModel<String> postListModel;
     private JList<String> postList;
@@ -44,7 +44,15 @@ public class Board extends JFrame {
         comments = new ArrayList<>();
         
         // 메인 패널을 BorderLayout으로 설정
-        JPanel panel = new JPanel(new BorderLayout());
+        JPanel panel = new JPanel(new BorderLayout()) {
+           @Override
+         protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(new ImageIcon("2.jpeg").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+         }
+        };
+        
+        
         
      // 각 버튼에 사용할 폰트 생성
         Font buttonFont = new Font("Noto Sans KR", Font.PLAIN, 16);  // 원하는 폰트 설정으로 변경
@@ -52,16 +60,25 @@ public class Board extends JFrame {
         // 게시글 작성을 위한 왼쪽 패널
         JPanel leftPanel = new JPanel();
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
-        leftPanel.setBorder(BorderFactory.createEmptyBorder(180, 50, 0, 0)); // 상좌하우 
-
+        leftPanel.setBorder(BorderFactory.createEmptyBorder(180, 50, 15, 0)); // 상좌하우 
+        leftPanel.setOpaque(false);
+        JPanel pn1 = new JPanel() {
+           @Override
+           public void paint(Graphics g) {
+              // TODO Auto-generated method stub
+              super.paint(g);
+           }
+        };
+                   
+        
         // 게시글 목록을 위한 오른쪽 패널
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
-        rightPanel.setBorder(BorderFactory.createEmptyBorder(180, 0, 0, 1150));
-        
+        rightPanel.setBorder(BorderFactory.createEmptyBorder(180, 0, 15, 1150));
+        rightPanel.setOpaque(false);
         JPanel upPanel = new JPanel();
         upPanel.setLayout(new BoxLayout(upPanel, BoxLayout.X_AXIS));
-        upPanel.setBorder(BorderFactory.createEmptyBorder(50, 600, 0, 0));
+        upPanel.setOpaque(false);
         upPanel.setBorder(BorderFactory.createEmptyBorder(40, 500, 0, 0));
 
         
@@ -70,8 +87,6 @@ public class Board extends JFrame {
         rouletteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RandomRoulette roulette = new RandomRoulette();
-                roulette.showRouletteDialog();
             }
         });
         
@@ -104,7 +119,7 @@ public class Board extends JFrame {
         upPanel.add(menuButton);
         upPanel.add(Box.createHorizontalStrut(30)); 
 
-        	
+           
      // 학식당 메뉴 버튼
         JButton sButton = new JButton("오늘 학식 보기");
         sButton.addActionListener(new ActionListener() {
@@ -168,7 +183,7 @@ public class Board extends JFrame {
         userInfoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String memberName = "권진영";
+                String memberName = "서정빈";
                 // 회원 정보를 나타내는 창을 생성하여 이름 표
                 JOptionPane.showMessageDialog(null, "회원 이름: " + memberName, "회원 정보", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -444,7 +459,7 @@ public class Board extends JFrame {
 
 
     private String getImagePathForCategory(String category) {
-    	// 예시: 이미지 파일이 "category_이름.jpg" 형식으로 저장되어 있다고 가정
+       // 예시: 이미지 파일이 "category_이름.jpg" 형식으로 저장되어 있다고 가정
         String imageName = "category_" + category.toLowerCase() + ".jpeg";
         
         // 실제 파일 경로를 가져오는 로직으로 변경해야 함
@@ -526,7 +541,7 @@ public class Board extends JFrame {
     
     private void openChatDialog() {
         // 유저 선택 창
-        String[] users = {"서정빈", "정예원", "윤성빈", "안예준"};  // 예시 유저 목록
+        String[] users = {"권진영", "정예원", "윤성빈", "안예준"};  // 예시 유저 목록
         JComboBox<String> userComboBox = new JComboBox<>(users);
         
         JPanel userSelectionPanel = new JPanel();
