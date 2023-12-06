@@ -30,7 +30,7 @@ public class Board extends JFrame {
     public Board() {
         setTitle("KOBAB");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 800);
+        setSize(1800, 1200);
 
         contents = new ArrayList<>();
 
@@ -40,16 +40,16 @@ public class Board extends JFrame {
         // 게시글 작성을 위한 왼쪽 패널
         JPanel leftPanel = new JPanel();
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
-        leftPanel.setBorder(BorderFactory.createEmptyBorder(100, 10, 10, 0));
+        leftPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 10, 0)); // 상좌하우 
 
         // 게시글 목록을 위한 오른쪽 패널
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
-        rightPanel.setBorder(BorderFactory.createEmptyBorder(100, 0, 0, 500));
+        rightPanel.setBorder(BorderFactory.createEmptyBorder(50, 0, 0, 1230));
         
         JPanel upPanel = new JPanel();
         upPanel.setLayout(new BoxLayout(upPanel, BoxLayout.X_AXIS));
-        upPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        upPanel.setBorder(BorderFactory.createEmptyBorder(50, 320, 0, 0));
         
         // 룰렛 기능 추가 버튼
         JButton rouletteButton = new JButton("메뉴 추천 룰렛");
@@ -69,6 +69,7 @@ public class Board extends JFrame {
             }
         });
         upPanel.add(storeButton);
+        upPanel.add(Box.createHorizontalStrut(60)); 
         
      // 가게 보기 버튼에 액션 리스너 추가
         storeButton.addActionListener(new ActionListener() {
@@ -87,6 +88,7 @@ public class Board extends JFrame {
             }
         });
         upPanel.add(menuButton);
+        upPanel.add(Box.createHorizontalStrut(60)); 
 
         	
      // 학식당 메뉴 버튼
@@ -100,6 +102,7 @@ public class Board extends JFrame {
             }
         });
         upPanel.add(sButton);
+        upPanel.add(Box.createHorizontalStrut(60)); 
         
         
         titleField = new JTextField();
@@ -108,7 +111,7 @@ public class Board extends JFrame {
         contentArea.setLineWrap(true);
         contentArea.setWrapStyleWord(true);
         JScrollPane contentScrollPane = new JScrollPane(contentArea);
-        contentScrollPane.setMaximumSize(new Dimension(450, 400));
+        contentScrollPane.setMaximumSize(new Dimension(450, 800));
         // 오른쪽 패널에 룰렛 버튼 추가
         upPanel.add(rouletteButton);
         
@@ -119,6 +122,7 @@ public class Board extends JFrame {
                 addPost();
             }
         });
+        
 
         postListModel = new DefaultListModel<>();      
         postList = new JList<>(postListModel);
@@ -131,7 +135,7 @@ public class Board extends JFrame {
             }
         });
         JScrollPane listScrollPane = new JScrollPane(postList);
-        listScrollPane.setMaximumSize(new Dimension(600, 350));
+        listScrollPane.setMaximumSize(new Dimension(800, 850));
 
         Font customFont = new Font("CookieRun Regular", Font.PLAIN, 14);
 
@@ -156,6 +160,7 @@ public class Board extends JFrame {
         // 메인 패널에 왼쪽과 오른쪽 패널 추가
         panel.add(leftPanel, BorderLayout.WEST);
         panel.add(rightPanel, BorderLayout.EAST);
+        panel.add(upPanel, BorderLayout.NORTH);
 
         add(panel);
         setVisible(true);
