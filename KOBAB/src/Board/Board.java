@@ -181,7 +181,7 @@ public class Board extends JFrame {
         JScrollPane listScrollPane = new JScrollPane(postList);
         listScrollPane.setMaximumSize(new Dimension(800, 650));
 
-        Font customFont = new Font("CookieRun Regular", Font.PLAIN, 14);
+        Font customFont = new Font("Noto Sans KR", Font.PLAIN, 16);
 
      // 왼쪽 패널에 컴포넌트 추가
         JLabel titleLabel = new JLabel("제목:");
