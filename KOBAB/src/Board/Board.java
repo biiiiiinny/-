@@ -104,6 +104,16 @@ public class Board extends JFrame {
         upPanel.add(sButton);
         upPanel.add(Box.createHorizontalStrut(60)); 
         
+        JButton chatButton = new JButton("채팅");
+        chatButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openChatDialog();
+            }
+        });
+
+        upPanel.add(chatButton);
+        upPanel.add(Box.createHorizontalStrut(60));
         
         titleField = new JTextField();
         titleField.setMaximumSize(new Dimension(450, 30));
@@ -351,5 +361,31 @@ public class Board extends JFrame {
             e.printStackTrace();
             return new String[] {}; // 에러 발생 시 빈 배열 반환
         }
+    }
+    
+    private void openChatDialog() {
+        // 간단한 채팅 다이얼로그를 만들어 보여줍니다.
+        JTextArea chatArea = new JTextArea();
+        chatArea.setEditable(false);
+
+        JTextField messageField = new JTextField();
+        messageField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String message = messageField.getText();
+                chatArea.append("나: " + message + "\n");
+                messageField.setText("");
+            }
+        });
+
+        JPanel chatPanel = new JPanel(new BorderLayout());
+        chatPanel.add(new JScrollPane(chatArea), BorderLayout.CENTER);
+        chatPanel.add(messageField, BorderLayout.SOUTH);
+
+        JDialog chatDialog = new JDialog(this, "채팅", true);
+        chatDialog.setSize(400, 300);
+        chatDialog.setLocationRelativeTo(null);
+        chatDialog.add(chatPanel);
+        chatDialog.setVisible(true);
     }
 }
