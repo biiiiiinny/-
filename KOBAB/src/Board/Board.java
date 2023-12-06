@@ -207,7 +207,7 @@ public class Board extends JFrame {
 
     private void showStoreList() {
         // 가게 목록 정의
-        String[] stores = {"멕시카나치킨 병천점", "수신반점 본점"};
+        String[] stores = {"멕시카나치킨 병천점", "수신반점 본점", "한솥도시락 병천한기대점"};
 
         // 각 가게에 대한 버튼 생성 및 리스너 추가
         JPanel storePanel = new JPanel();
