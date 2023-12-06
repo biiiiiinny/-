@@ -49,7 +49,11 @@ public class Board extends JFrame {
         // 게시글 목록을 위한 오른쪽 패널
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
-        rightPanel.setBorder(BorderFactory.createEmptyBorder(180, 0, 0, 1150));
+        rightPanel.setBorder(BorderFactory.createEmptyBorder(180, 0, 0, 1250));
+        
+        JPanel rightInnerPanel = new JPanel();
+        rightInnerPanel.setLayout(new BoxLayout(rightInnerPanel, BoxLayout.X_AXIS));
+        rightPanel.add(rightInnerPanel);
         
         JPanel upPanel = new JPanel();
         upPanel.setLayout(new BoxLayout(upPanel, BoxLayout.X_AXIS));
@@ -282,7 +286,7 @@ public class Board extends JFrame {
         // 가게 목록 정의
         String[] stores = {"멕시카나치킨 병천점", "수신반점 본점", "한솥도시락 병천한기대점", "신전떡복이 한기대점"
                            ,"왕천파닭 병천점", "김밥천국 한기대점", "거성한식식당 2호점", "마슬랜치킨 병천한기대점"
-                           , ""};
+                           , "카페 요깃", "심야술집"};
         
 
         // 각 가게에 대한 버튼 생성 및 리스너 추가
