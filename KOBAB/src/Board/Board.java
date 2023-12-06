@@ -9,6 +9,16 @@ import java.util.Random;
 import java.io.File;
 import java.io.IOException;
 import Roulette.RandomRoulette;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
+import java.net.URLEncoder;
+import java.net.URL;
+import java.awt.Desktop;
 
 public class Board extends JFrame {
     private JTextField titleField;
@@ -55,6 +65,14 @@ public class Board extends JFrame {
             }
         });
         rightPanel.add(storeButton);
+        
+     // 가게 보기 버튼에 액션 리스너 추가
+        storeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showStoreList();
+            }
+        });
         
      // 카테고리 버튼
         JButton menuButton = new JButton("카테고리 보기");
@@ -187,6 +205,42 @@ public class Board extends JFrame {
         categoryDialog.setVisible(true);
     }
 
+    private void showStoreList() {
+        // 가게 목록 정의
+        String[] stores = {"멕시카나치킨 병천점", "수신반점 본점"};
+
+        // 각 가게에 대한 버튼 생성 및 리스너 추가
+        JPanel storePanel = new JPanel();
+        storePanel.setLayout(new BoxLayout(storePanel, BoxLayout.Y_AXIS));
+        for (String store : stores) {
+            JButton storeButton = new JButton(store);
+            storeButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    showMapForStore(store);
+                }
+            });
+            storePanel.add(storeButton);
+        }
+
+        // 가게 목록을 표시하는 다이얼로그 생성 및 표시
+        JDialog dialog = new JDialog(this, "가게 목록", true);
+        dialog.add(new JScrollPane(storePanel));
+        dialog.setSize(300, 400);
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }
+
+    private void showMapForStore(String storeName) {
+        // 네이버 지도 API를 사용하여 지도를 표시하는 로직
+        try {
+            String encodedStoreName = URLEncoder.encode(storeName, "UTF-8");
+            Desktop.getDesktop().browse(new URL("https://map.naver.com/v5/search/" + encodedStoreName).toURI());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     private void showImageForCategory(String category) {
         // 각 카테고리에 해당하는 이미지 경로를 설정
         String imagePath = getImagePathForCategory(category);
@@ -239,5 +293,50 @@ public class Board extends JFrame {
         dialog.add(panel);
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
+    }
+    
+    private String[] getStoresFromAPI() {
+        String clientId = "ij1uyxo960"; // 네이버 개발자 센터에서 발급받은 클라이언트 ID
+        String clientSecret = "Jfx8Tgv7beNUkkY83yiZAv7H3I9Rotwbjrv4TWqI"; // 네이버 개발자 센터에서 발급받은 클라이언트 시크릿
+        try {
+            String apiURL = "https://openapi.naver.com/v1/search/local.json?query=한기대음식점"; // 검색어 '한기대 음식점'으로 지역 검색
+            URL url = new URL(apiURL);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("X-Naver-Client-Id", clientId);
+            con.setRequestProperty("X-Naver-Client-Secret", clientSecret);
+
+            int responseCode = con.getResponseCode();
+            BufferedReader br;
+            if (responseCode == 200) { // 정상 호출
+                br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            } else {  // 에러 발생
+                br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+            }
+
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+            while ((inputLine = br.readLine()) != null) {
+                response.append(inputLine);
+            }
+            br.close();
+
+            // JSON 파싱
+            JSONParser parser = new JSONParser();
+            JSONObject jsonResponse = (JSONObject) parser.parse(response.toString());
+            JSONArray items = (JSONArray) jsonResponse.get("items");
+            String[] stores = new String[items.size()];
+            for (int i = 0; i < items.size(); i++) {
+                JSONObject item = (JSONObject) items.get(i);
+                String title = (String) item.get("title");
+                stores[i] = title.replaceAll("<[^>]*>", ""); // HTML 태그 제거
+            }
+
+            return stores;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new String[] {}; // 에러 발생 시 빈 배열 반환
+        }
     }
 }
