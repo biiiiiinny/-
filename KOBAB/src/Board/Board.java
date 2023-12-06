@@ -26,10 +26,13 @@ public class Board extends JFrame {
     private DefaultListModel<String> postListModel;
     private JList<String> postList;
     private List<String> contents;
+    private static final int BUTTON_FONT_SIZE = 23; // 버튼 폰트 크기 상수
+
     
     private static final double BUTTON_WIDTH_RATIO = 0.5;  // 폭 비율
     private static final double BUTTON_HEIGHT_RATIO = 1.5; // 높이 비율
 
+    private List<List<String>> comments; // 댓글 목록을 저장하는 리스트
 
     public Board() {
         setTitle("KOBAB");
@@ -38,6 +41,8 @@ public class Board extends JFrame {
 
         contents = new ArrayList<>();
 
+        comments = new ArrayList<>();
+        
         // 메인 패널을 BorderLayout으로 설정
         JPanel panel = new JPanel(new BorderLayout());
         
@@ -104,7 +109,7 @@ public class Board extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 이미지 파일의 경로를 적절히 변경하세요.
-                String imagePath = "a.jpeg";
+                String imagePath = "1.jpeg";
                 showImage(imagePath);
             }
         });
@@ -178,7 +183,7 @@ public class Board extends JFrame {
             int index = postList.getSelectedIndex();
             if (index >= 0) {
                 String content = contents.get(index);
-                JOptionPane.showMessageDialog(null, content, "게시글 내용", JOptionPane.PLAIN_MESSAGE);
+                //JOptionPane.showMessageDialog(null, content, "게시글 내용", JOptionPane.PLAIN_MESSAGE);
             }
         });
         JScrollPane listScrollPane = new JScrollPane(postList);
@@ -221,6 +226,13 @@ public class Board extends JFrame {
         addButton.setFont(customFont);
         
 
+        postList.addListSelectionListener(e -> {
+            int index = postList.getSelectedIndex();
+            if (index >= 0) {
+                String content = contents.get(index);
+                showPostDetail(content, comments.get(index)); // 게시글 상세 정보 및 댓글 표시
+            }
+        });
         
         Dimension buttonSize = new Dimension((int)(100 * BUTTON_WIDTH_RATIO), (int)(30 * BUTTON_HEIGHT_RATIO));
         storeButton.setPreferredSize(buttonSize);
@@ -240,12 +252,56 @@ public class Board extends JFrame {
 
     }
 
+    private void showPostDetail(String content, List<String> postComments) {
+        JTextArea contentTextArea = new JTextArea(content);
+        contentTextArea.setEditable(false);
+
+        JTextArea commentsTextArea = new JTextArea();
+        commentsTextArea.setEditable(false);
+
+        // 댓글 목록 추가
+        for (String comment : postComments) {
+            commentsTextArea.append(comment + "\n");
+        }
+
+        JScrollPane commentsScrollPane = new JScrollPane(commentsTextArea);
+
+        // 댓글 달기 버튼
+        JButton commentButton = new JButton("댓글 달기");
+        commentButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String newComment = JOptionPane.showInputDialog("댓글을 입력하세요:");
+                if (newComment != null && !newComment.isEmpty()) {
+                    postComments.add(newComment);
+                    commentsTextArea.append(newComment + "\n");
+                }
+            }
+        });
+
+        // 상세 정보 패널
+        JPanel detailPanel = new JPanel(new BorderLayout());
+        detailPanel.add(new JScrollPane(contentTextArea), BorderLayout.CENTER);
+        detailPanel.add(commentsScrollPane, BorderLayout.SOUTH);
+
+        // 댓글 달기 버튼 추가
+        detailPanel.add(commentButton, BorderLayout.SOUTH);
+
+        // 상세 정보 다이얼로그
+        JDialog detailDialog = new JDialog(this, "게시글 상세 정보", true);
+        detailDialog.setSize(400, 300);
+        detailDialog.setLocationRelativeTo(null);
+        detailDialog.add(detailPanel);
+        detailDialog.setVisible(true);
+    }
+    
     private void addPost() {
         String title = titleField.getText();
         String content = contentArea.getText();
         if (!title.isEmpty() && !content.isEmpty()) {
             postListModel.addElement(title);
             contents.add(content);
+            comments.add(new ArrayList<>()); // 새로운 게시글에 대한 댓글 목록 초기화
             titleField.setText("");
             contentArea.setText("");
         }
