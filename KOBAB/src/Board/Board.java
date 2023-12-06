@@ -459,13 +459,6 @@ public class Board extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new Board().setVisible(true);
-            
-        });
-        
-    }
     
     private void showImage(String imagePath) {
         ImageIcon icon = new ImageIcon(imagePath);
@@ -579,6 +572,6 @@ public class Board extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Board().setVisible(true));
+        SwingUtilities.invokeLater(() -> {new Board().setVisible(true);}); 
     }
 }
