@@ -61,7 +61,7 @@ public class Board extends JFrame {
         
         JPanel upPanel = new JPanel();
         upPanel.setLayout(new BoxLayout(upPanel, BoxLayout.X_AXIS));
-
+        upPanel.setBorder(BorderFactory.createEmptyBorder(50, 600, 0, 0));
         upPanel.setBorder(BorderFactory.createEmptyBorder(40, 500, 0, 0));
 
         
