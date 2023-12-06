@@ -221,6 +221,16 @@ public class Board extends JFrame {
 
         setLocationRelativeTo(null);
         
+        JButton deleteButton = new JButton("게시글 삭제");
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deletePost();
+            }
+        });
+
+        rightPanel.add(deleteButton);
+        
         // 컴포넌트에 적용할 폰트 설정
         titleField.setFont(customFont);
         contentArea.setFont(customFont);
@@ -306,6 +316,16 @@ public class Board extends JFrame {
             comments.add(new ArrayList<>()); // 새로운 게시글에 대한 댓글 목록 초기화
             titleField.setText("");
             contentArea.setText("");
+        }
+    }
+
+    // 새로운 메서드 추가: 선택한 게시글 삭제
+    private void deletePost() {
+        int selectedIndex = postList.getSelectedIndex();
+        if (selectedIndex >= 0) {
+            postListModel.remove(selectedIndex);
+            contents.remove(selectedIndex);
+            comments.remove(selectedIndex);
         }
     }
     
